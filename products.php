@@ -10,10 +10,15 @@ $sortByDiscount = isset($_GET['sort_by_discount']) ? $_GET['sort_by_discount'] :
 
 // Base query to fetch products with optional category filter
 $productQuery = "
-    SELECT p.*, c.category_name 
-    FROM tbl_product p 
-    LEFT JOIN tbl_category c ON p.category_id = c.category_id 
+    SELECT 
+        p.*, 
+        c.category_name,
+        COALESCE(AVG(r.rating), 0) AS avg_rating
+    FROM tbl_product p
+    LEFT JOIN tbl_category c ON p.category_id = c.category_id
+    LEFT JOIN tbl_ratings r ON r.product_id = p.product_id
     WHERE c.category_name IS NOT NULL"; // Exclude products with no category
+
 
 // Add category filter if categoryId is provided
 if ($categoryId !== null && $categoryId != 0) {
@@ -28,13 +33,13 @@ if ($discountRange) {
         $productQuery .= " AND p.product_dis BETWEEN 50 AND 100";
     }
 }
-
+$productQuery .= " GROUP BY p.product_id";
 // Add sorting by discount if specified
 if ($sortByDiscount) {
     if ($sortByDiscount == 'high-to-low') {
-        $productQuery .= " ORDER BY p.product_dis DESC";
-    } else {
         $productQuery .= " ORDER BY p.product_dis ASC";
+    } else {
+        $productQuery .= " ORDER BY p.product_dis DESC";
     }
 } else {
     // Default sorting by category and date if no sort is specified
@@ -180,9 +185,27 @@ while ($category = mysqli_fetch_assoc($categoryResult)) {
                                                     ₹<?= number_format($product['product_price'] - $product['product_dis_value'], 2) ?>
                                                 </span>
                                             </div>
+
+                                            <!-- Add Star Ratings -->
+                                            <div class="mt-2">
+                                                <?php
+                                                $avgRating = round($product['avg_rating'], 1); // Rounded average rating
+                                                for ($i = 1; $i <= 5; $i++) {
+                                                    if ($i <= $avgRating) {
+                                                        echo '<i class="bi bi-star-fill text-warning"></i>'; // Filled star
+                                                    } elseif ($i - 0.5 <= $avgRating) {
+                                                        echo '<i class="bi bi-star-half text-warning"></i>'; // Half star
+                                                    } else {
+                                                        echo '<i class="bi bi-star text-muted"></i>'; // Empty star
+                                                    }
+                                                }
+                                                ?>
+                                                <span class="text-muted">(<?= $avgRating ?>)</span>
+                                            </div>
                                             <div class="meta-stock mt-2 <?= $product['product_stock'] > 0 ? 'text-success' : 'text-danger' ?> fw-bold">
                                                 <?= $product['product_stock'] > 0 ? 'In Stock' : 'Out of Stock' ?>
                                             </div>
+
                                             <div class="row g-1 mt-2">
                                                 <div class="col-8">
                                                     <a href="add_to_cart.php?product_id=<?= $product['product_id'] ?>" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart">

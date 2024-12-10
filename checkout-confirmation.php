@@ -44,13 +44,13 @@ $order_items_result = $order_items_stmt->get_result();
 ?>
 
 <div class="content-wrapper">
+<section class="hero-section text-center py-5 bg-primary text-white">
+        <h1 class="fw-bold mb-3">Order Confirmation</h1>
+        <p class="lead">View your past orders and track their status.</p>
+    </section>
     <section class="order-confirmation py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <h2 class="text-primary">Order Confirmation</h2>
-                    <p>Your order has been successfully placed. Below are the details of your order.</p>
-                </div>
+            <div class="row"> 
 
                 <!-- Order Summary -->
                 <div class="col-md-6">
@@ -59,8 +59,8 @@ $order_items_result = $order_items_stmt->get_result();
                     <p><strong>Status:</strong> <?= ucfirst($order_status) ?></p>
                     <p><strong>Order Date:</strong> <?= date("d/m/Y", strtotime($order_date)) ?></p>
                     <p><strong>Total Amount:</strong> ₹ <?= number_format($total_amount, 2) ?></p>
-                    <p><strong>Payment Method:</strong> <?= ucfirst($payment_method) ?></p>
-                    <p><strong>Payment Status:</strong> <?= ucfirst($payment_status) ?></p>
+                    <p class=""><strong>Payment Method:</strong> <?= ucfirst($payment_method) == 1 ?"Cash On Delivery":"Online" ?></p>
+                    <p><strong>Payment Status:</strong> <?= ucfirst($payment_status) == 1 ?"Pending":"Completed" ?></p>
                 </div>
 
                 <!-- Shipping Address -->

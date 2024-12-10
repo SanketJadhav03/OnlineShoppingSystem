@@ -47,10 +47,10 @@ $order_result = $stmt->get_result();
                                     <p><strong>Date:</strong> <?php echo $order_date; ?></p>
                                 </div>
                                 <div class="col-3">
-                                    <p><strong>Status:</strong> <span class="badge bg-info text-dark"><?php echo $order_status; ?></span></p>
+                                    <p><strong>Status:</strong> <span class="badge bg-info  text-dark"><?php echo $order_status; ?></span></p>
                                 </div>
                                 <div class="col-3 ">
-                                    <a href="order-track.php?order_id=<?php echo $order_id; ?>" class="btn btn-outline-primary mt-3 w-100">Track Order</a>
+                                    <a href="order-track.php?order_id=<?php echo $order_id; ?>" class="btn btn-outline-primary mt-3 w-100">More Details</a>
                                 </div>
                             </div> <!-- End of order-card -->
                         </div>

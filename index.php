@@ -11,7 +11,7 @@ include("component/header.php");
         <h2 class="display-1 ls-1"><span class="fw-bold text-primary">Streamline Shop </span> <span class="fw-bold">Elevate Experience.</span></h2>
         <p class="fs-4"> " Where Shopping Meets Simplicity "</p>
         <div class="d-flex gap-3   pb-5">
-          <a href="products.php" class="mt-5 btn btn-primary  fs-6 rounded-pill px-4 py-3 mt-3"><i class="fas fa-shopping-cart"></i> &nbsp;Start Shopping     
+          <a href="products.php" class="mt-5 btn btn-primary  fs-6 rounded-pill px-4 py-3 mt-3"><i class="fas fa-shopping-cart"></i> &nbsp;Start Shopping
           </a>
 
         </div>
@@ -119,7 +119,7 @@ include("component/header.php");
 
       </div>
     </div>
-    
+
     <div class="row">
       <div class="col-md-12">
 
@@ -128,7 +128,12 @@ include("component/header.php");
             <?php
             $sql = "SELECT * FROM tbl_product ORDER BY created_at DESC LIMIT 10";
             $result = $conn->query($sql);
-            while ($row = $result->fetch_assoc()): ?>
+            while ($row = $result->fetch_assoc()):
+              // Calculate the number of filled stars and empty stars
+              $rating = isset($row['product_rating']) ? intval($row['product_rating']) : 0; // Assuming rating is between 0-5
+              $filledStars = $rating;
+              $emptyStars = 5 - $filledStars;
+            ?>
               <div class="product-item swiper-slide">
                 <figure>
                   <a href="products-view.php?product_id=<?= $row['product_id'] ?>" title="<?= htmlspecialchars($row['product_name']) ?>">
@@ -137,6 +142,16 @@ include("component/header.php");
                 </figure>
                 <div class="d-flex flex-column text-center">
                   <h3 class="fs-6 fw-normal"><?= htmlspecialchars($row['product_name']) ?></h3>
+
+                  <!-- Star Rating Section -->
+                  <div class="d-flex justify-content-center align-items-center mb-2">
+                    <?php for ($i = 0; $i < $filledStars; $i++): ?>
+                      <i class="bi bi-star-fill text-warning"></i> <!-- Filled star -->
+                    <?php endfor; ?>
+                    <?php for ($i = 0; $i < $emptyStars; $i++): ?>
+                      <i class="bi bi-star text-muted"></i> <!-- Empty star -->
+                    <?php endfor; ?>
+                  </div>
 
                   <div class="d-flex justify-content-center align-items-center gap-2">
                     <?php if ($row['product_price'] > 20): ?>
@@ -168,10 +183,9 @@ include("component/header.php");
                 </div>
               </div>
             <?php endwhile; ?>
-
-
           </div>
         </div>
+
         <!-- / products-carousel -->
 
       </div>

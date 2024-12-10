@@ -18,7 +18,7 @@ $total = $_POST['total_price'];  // Total price passed from the checkout form
 
 // Insert order into tbl_orders
 $order_query = "INSERT INTO tbl_orders (customer_id, total_price, order_date,shipping_address,payment_method, payment_status) 
-                VALUES ('$customer_id', '$total', NOW(),$address,$payment_method, '1')";
+                VALUES ('$customer_id', '$total', NOW(),'$address',$payment_method, '1')";
 if (mysqli_query($conn, $order_query)) {
     $order_id = mysqli_insert_id($conn);
 
