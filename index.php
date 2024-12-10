@@ -126,12 +126,33 @@ include("component/header.php");
         <div class="swiper">
           <div class="swiper-wrapper">
             <?php
-            $sql = "SELECT * FROM tbl_product ORDER BY created_at DESC LIMIT 10";
+            // Fetch product details along with average rating from tbl_ratings
+            $sql = "
+            SELECT 
+                p.product_id, 
+                p.product_name, 
+                p.product_image, 
+                p.product_price, 
+                p.product_dis_value, 
+                p.product_dis, 
+                IFNULL(AVG(r.rating), 0) AS avg_rating 
+            FROM 
+                tbl_product p
+            LEFT JOIN 
+                tbl_ratings r 
+            ON 
+                p.product_id = r.product_id
+            GROUP BY 
+                p.product_id
+            ORDER BY 
+                p.created_at DESC 
+            LIMIT 10";
             $result = $conn->query($sql);
+
             while ($row = $result->fetch_assoc()):
-              // Calculate the number of filled stars and empty stars
-              $rating = isset($row['product_rating']) ? intval($row['product_rating']) : 0; // Assuming rating is between 0-5
-              $filledStars = $rating;
+              // Calculate the number of filled and empty stars based on avg_rating
+              $avg_rating = round($row['avg_rating']); // Rounded to the nearest whole number
+              $filledStars = $avg_rating;
               $emptyStars = 5 - $filledStars;
             ?>
               <div class="product-item swiper-slide">
@@ -185,6 +206,7 @@ include("component/header.php");
             <?php endwhile; ?>
           </div>
         </div>
+
 
         <!-- / products-carousel -->
 
