@@ -38,23 +38,19 @@ if (!$product) {
             <p class="product-description"><?= $product['product_description']; ?></p>
 
             <div class="product-price">
-                <del>$<?= number_format($product['product_price'], 2); ?></del>
-                <span class="text-dark fw-semibold">$<?= number_format($product['product_price'] - $product['product_dis_value'], 2); ?></span>
+                <del>&#8377; <?= number_format($product['product_price'], 2); ?></del>
+                <span class="text-dark fw-semibold">&#8377; <?= number_format($product['product_price'] - $product['product_dis_value'], 2); ?></span>
                 <span class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary"><?= $product['product_dis'] ?>% OFF</span>
             </div>
-
-
-            <div class="product-quantity">
-                <input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1">
-            </div>
+ 
 
             <div class="button-area mt-3">
-                <a href="cart.php?product_id=<?= $product['product_id']; ?>&quantity=1" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart">
+                <a href="add_to_cart.php?product_id=<?= $product['product_id'] ?>" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart">
                     <svg width="18" height="18">
                         <use xlink:href="#cart"></use>
                     </svg> Add to Cart
                 </a>
-                <a href="wishlist.php?product_id=<?= $product['product_id']; ?>" class="btn btn-outline-dark rounded-1 p-2 fs-6">
+                <a href="add_wish_list.php?product_id=<?= $product['product_id'] ?>" class="btn btn-outline-dark rounded-1 p-2 fs-7 mt-2 btn-cart">
                     <svg width="18" height="18">
                         <use xlink:href="#heart"></use>
                     </svg> Add to Wishlist
@@ -109,14 +105,14 @@ if (!$product) {
                                 </figure>
                                 <h4 class="fs-6"><?= $similar_product['product_name']; ?></h4>
                                 <dic class="d-flex justify-content-between">
-                                <div class="product-price">
-                                    <span>&#8377;
-                                        <?= number_format($similar_product["product_price"] - $similar_product['product_dis_value'], 2); ?></span>
-                                </div>
-                                <div>
-                                    <span class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary"><?= $product['product_dis'] ?>% OFF</span>
+                                    <div class="product-price">
+                                        <span>&#8377;
+                                            <?= number_format($similar_product["product_price"] - $similar_product['product_dis_value'], 2); ?></span>
+                                    </div>
+                                    <div>
+                                        <span class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary"><?= $product['product_dis'] ?>% OFF</span>
 
-                                </div>
+                                    </div>
                                 </dic>
                             </div>
                         <?php } ?>
