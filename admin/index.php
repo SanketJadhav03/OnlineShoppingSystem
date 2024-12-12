@@ -16,7 +16,7 @@ $product_result = mysqli_query($conn, $product_query);
 $product_count = mysqli_fetch_assoc($product_result)['product_count'];
 
 // Count Orders
-$order_query = "SELECT COUNT(*) AS order_count FROM tbl_order_masters";  
+$order_query = "SELECT COUNT(*) AS order_count FROM tbl_orders";  
 $order_result = mysqli_query($conn, $order_query);
 $order_count = mysqli_fetch_assoc($order_result)['order_count'];
 
