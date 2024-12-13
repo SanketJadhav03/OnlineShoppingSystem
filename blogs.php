@@ -17,7 +17,7 @@ $result = mysqli_query($conn, $selectQuery);
                     <div class="col-md-4 mb-4">
                         <article class="post-item card border-0 shadow-sm p-3 rounded-lg hover-zoom">
                             <div class="image-holder position-relative overflow-hidden rounded-lg">
-                                <a href="view.php?blog_id=<?= $data['blog_id'] ?>">
+                                <a href="blog_view.php?blog_id=<?= $data['blog_id'] ?>">
                                     <img src="admin/uploads/blogs/<?= $data['blog_image_path'] == null ? 'no_img.png' : $data['blog_image_path'] ?>" alt="post" class="card-img-top w-100">
                                 </a>
                                 <div class="hover-overlay position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center">
@@ -39,7 +39,7 @@ $result = mysqli_query($conn, $selectQuery);
                                 </div>
                                 <div class="post-header">
                                     <h4 class="post-title">
-                                        <a href="view.php?blog_id=<?= $data['blog_id'] ?>" class="text-decoration-none text-dark fw-bold"><?= htmlspecialchars($data['blog_title']) ?></a>
+                                        <a href="blog_view.php?blog_id=<?= $data['blog_id'] ?>" class="text-decoration-none text-dark fw-bold"><?= htmlspecialchars($data['blog_title']) ?></a>
                                     </h4>
                                     <p class="text-muted"><?= strip_tags($data['blog_content']) ?></p>
                                 </div>

@@ -269,7 +269,7 @@ include("component/header.php");
         <div class="col-md-4">
           <article class="post-item card border-0 shadow-sm p-3">
             <div class="image-holder zoom-effect">
-              <a href="view.php?blog_id=<?= $data['blog_id'] ?>">
+              <a href="blog_view.php?blog_id=<?= $data['blog_id'] ?>">
                 <img src="admin/uploads/blogs/<?= $data['blog_image_path'] == null ? 'no_img.png' : $data['blog_image_path'] ?>" alt="post" class="card-img-top">
               </a>
             </div>
