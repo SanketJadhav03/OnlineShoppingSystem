@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include "../config/connection.php";
 include "../component/header.php";
@@ -14,7 +14,7 @@ if (isset($_POST["register_customer"])) {
     $customer_phone = mysqli_real_escape_string($conn, $_POST["customer_phone"]);
     $customer_address = mysqli_real_escape_string($conn, $_POST["customer_address"]);
     $customer_status = 1;  // Assuming a default active status of 1 when a new customer is created
-    
+
     // Image upload processing
     $customer_image = $_FILES["customer_image"]["name"];
     $customer_image_temp = $_FILES["customer_image"]["tmp_name"];
@@ -88,15 +88,15 @@ if (isset($_POST["register_customer"])) {
                 <!-- Display error or success messages -->
                 <?php
                 if (isset($_SESSION["error"])) {
-                    echo "<p style='color: red;'>".$_SESSION["error"]."</p>";
+                    echo "<p style='color: red;'>" . $_SESSION["error"] . "</p>";
                     unset($_SESSION["error"]);
                 }
                 if (isset($_SESSION["success"])) {
-                    echo "<p style='color: green;'>".$_SESSION["success"]."</p>";
+                    echo "<p style='color: green;'>" . $_SESSION["success"] . "</p>";
                     unset($_SESSION["success"]);
                 }
                 ?>
-                
+
                 <div class="row">
                     <div class="col-4">
                         <label for="customer_name">Full Name <span class="text-danger">*</span></label>
@@ -106,11 +106,19 @@ if (isset($_POST["register_customer"])) {
                         <label for="customer_email">Email <span class="text-danger">*</span></label>
                         <input type="email" placeholder="Enter email" class="form-control font-weight-bold" name="customer_email" id="customer_email" required>
                     </div>
-                    <div class="col-4  ">
+                    <div class="col-4">
                         <label for="customer_phone">Phone Number <span class="text-danger">*</span></label>
-                        <input type="text" placeholder="Enter phone number" class="form-control font-weight-bold" name="customer_phone" id="customer_phone" required>
-                    </div>
-                    
+                        <input
+                            type="text"
+                            placeholder="Enter phone number"
+                            class="form-control font-weight-bold"
+                            name="customer_phone"
+                            id="customer_phone"
+                            pattern="^[6-9]\d{9}$"
+                            title="Please enter a valid 10-digit phone number starting with 6, 7, 8, or 9."
+                            maxlength="10"
+                            required>
+                    </div> 
                     <div class="col-4 mt-3">
                         <label for="customer_password">Password <span class="text-danger">*</span></label>
                         <input type="password" placeholder="Enter password" class="form-control font-weight-bold" name="customer_password" id="customer_password" required>

@@ -1,10 +1,4 @@
-<li>
-    <a href="#" class="mt-1 mx-1 nav-link " data-bs-toggle="offcanvas" data-bs-target="#offcanvasWish" aria-controls="offcanvasWish">
-        <svg width="24" height="24">
-            <use xlink:href="#wishlist"></use>
-        </svg>
-    </a>
-</li>
+
 
 <?php
 // Ensure the user is logged in
@@ -31,6 +25,18 @@ foreach ($wishlistItems as $item) {
     $totalPrice += ($item['product_price'] - $item['product_dis_value']);
 }
 ?>
+<li class="nav-item mt-2 mx-2 position-relative">
+    <a href="#" class="nav-link  mx-1 d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWish" aria-controls="offcanvasWish">
+        <svg width="24" height="24" class="wishlist-icon">
+            <use xlink:href="#wishlist"></use>
+        </svg>
+    </a>
+    <!-- Notification Badge -->
+    <span class="badge bg-danger rounded-circle position-absolute top-0 start-100 translate-middle p-2">
+        5
+        <span class="visually-hidden">Items in wishlist</span>
+    </span>
+</li>
 
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWish">
     <div class="offcanvas-header justify-content-center">

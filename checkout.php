@@ -56,7 +56,7 @@ foreach ($cartItems as $item) {
                                     </div>
                                     <span class="text-body-secondary">₹ <?= number_format($itemTotal, 2) ?></span>
                                 </li>
-                            <?php
+                        <?php
                             }
                         } else {
                             echo "<li class='list-group-item d-flex justify-content-center lh-sm'>Your cart is empty</li>";
@@ -89,13 +89,22 @@ foreach ($cartItems as $item) {
                             <label for="address" class="form-label fw-bold">Delivery Address <span class="text-danger fw-bold">*</span></label>
                             <textarea class="form-control" id="address" name="address" rows="5" required placeholder="Enter your delivery address..."></textarea>
                         </div>
-                        <div class="mb-3">
-                            <label for="payment_method" class="form-label fw-bold">Payment Method <span class="text-danger fw-bold">*</span></label>
+                        <div class="mb-1">
+                            <label for="payment_method" class="form-label fw-bold">
+                                Payment Method <span class="text-danger fw-bold">*</span>
+                            </label>
                             <select class="form-select" id="payment_method" name="payment_method" required>
                                 <option value="1">Cash on Delivery</option>
                                 <option value="2">Online Payment</option>
                             </select>
                         </div>
+
+                        <!-- QR Code Container -->
+                        <div id="qr_code_container" class="mt-2 text-center mb-3" style="display: none;">
+                            <p class="fw-bold">Scan the QR code below to make your payment:</p>
+                            <img src="qr/qr.jpeg" alt="QR Code" style="width: 150px; height: 150px;">
+                        </div>
+
                         <!-- Hidden Field to Send Total Price -->
                         <input type="hidden" name="total_price" value="<?= $total ?>">
                         <button type="submit" class="btn btn-primary w-100">Place Order</button>
@@ -105,7 +114,17 @@ foreach ($cartItems as $item) {
         </div>
     </section>
 </div>
+<script>
+    document.getElementById('payment_method').addEventListener('change', function () {
+    const qrCodeContainer = document.getElementById('qr_code_container');
+    if (this.value === '2') {
+        qrCodeContainer.style.display = 'block'; // Show QR code
+    } else {
+        qrCodeContainer.style.display = 'none'; // Hide QR code
+    }
+});
 
+</script>
 <?php
 include("component/footer.php");
 ?>

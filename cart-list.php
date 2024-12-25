@@ -1,10 +1,4 @@
-<li>
-    <a href="#" class="mt-1 mx-1 nav-link " data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-        <svg width="24" height="24">
-            <use xlink:href="#shopping-bag"></use>
-        </svg>
-    </a>
-</li>
+
 <?php
 // Ensure the user is logged in
 if (!isset($_SESSION['customer_id'])) {
@@ -24,6 +18,18 @@ if (!isset($_SESSION['customer_id'])) {
     $cartItems = $result->fetch_all(MYSQLI_ASSOC);
 }
 ?>
+<li class="nav-item mt-2 position-relative">
+    <a href="#" class="nav-link  mx-1 d-flex align-items-center" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+        <svg width="24" height="24" class="shopping-bag-icon">
+            <use xlink:href="#shopping-bag"></use>
+        </svg>
+    </a>
+    <!-- Notification Badge -->
+    <span class="badge bg-danger rounded-circle position-absolute top-0 start-100 translate-middle p-2">
+    <?= count($cartItems) ?>
+        <span class="visually-hidden">Unread cart items</span>
+    </span>
+</li>
 
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart">
     <div class="offcanvas-header justify-content-center">

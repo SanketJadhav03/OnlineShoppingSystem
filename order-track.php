@@ -28,6 +28,7 @@ if (isset($_GET['order_id'])) {
         $order = $order_result->fetch_assoc();
         $order_date = date("d/m/Y", strtotime($order['order_date']));
         $total_price = number_format($order['total_price'], 2);
+        $payment_method = $order['payment_method'];
         $payment_status = $order['payment_status'];
         $order_status = (int)$order['order_status']; // Ensure it is an integer
     } else {
@@ -63,6 +64,7 @@ if (isset($_GET['order_id'])) {
                             <h5>Order ID: <?=  htmlspecialchars($order_id) ?></h5>
                             <p><strong>Date:</strong> <?= $order_date ?></p>
                             <p><strong>Total Price:</strong> ₹<?= $total_price ?></p>
+                            <p><strong>Payment Method:</strong> <?= ucfirst($payment_method) == 1 ? "Cash On delivery":"Online" ?></p>
                             <p><strong>Payment Status:</strong> <?= ucfirst($payment_status) == 1 ? "<span class='text-success fw-bold'>Paid</span>":"<span class='text-danger fw-bold'>Unpaid</span>" ?></p>
 
                             <!-- Display Order Status as a Map -->
