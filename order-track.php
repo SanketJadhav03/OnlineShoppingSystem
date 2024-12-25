@@ -43,7 +43,7 @@ if (isset($_GET['order_id'])) {
     <section class="hero-section text-center py-5 bg-primary text-white">
         <h1 class="font-weight-bold mb-3">Track Your Order</h1>
         <p class="lead">Order ID: <?= isset($order_id) ? htmlspecialchars($order_id) : 'Not Found' ?></p>
-        <a href="index.php" class="btn btn-light mt-3">Back to Home</a>
+        <a href="index.php" class="btn btn-light mt-3"> <i class="fas fa-home "></i> Back to Home</a>
     </section>
 
     <!-- Order Tracking Section -->
@@ -55,14 +55,15 @@ if (isset($_GET['order_id'])) {
                     if ($error_message) {
                         echo "<div class='alert alert-danger'>$error_message</div>";
                     }
+                    $current_month_number = date('n');
 
                     if ($order) {
                     ?>
                         <div class="order-card p-4 border shadow-sm">
-                            <h5>Order ID: <?= htmlspecialchars($order_id) ?></h5>
+                            <h5>Order ID: <?=  htmlspecialchars($order_id) ?></h5>
                             <p><strong>Date:</strong> <?= $order_date ?></p>
                             <p><strong>Total Price:</strong> ₹<?= $total_price ?></p>
-                            <p><strong>Payment Status:</strong> <?= ucfirst($payment_status) ?></p>
+                            <p><strong>Payment Status:</strong> <?= ucfirst($payment_status) == 1 ? "<span class='text-success fw-bold'>Paid</span>":"<span class='text-danger fw-bold'>Unpaid</span>" ?></p>
 
                             <!-- Display Order Status as a Map -->
                             <h6>Order Status:</h6>
@@ -134,13 +135,13 @@ if (isset($_GET['order_id'])) {
                                 <?php } ?>
                             </ul>
 
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h6 class="text-right"><strong>Grand Total:</strong> ₹<?= number_format($grand_total, 2) ?></h6>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <h5 class="text-right"><strong>Grand Total:</strong> ₹<?= number_format($grand_total, 2) ?></h5>
                             </div>
 
                             <!-- Rate Order Button -->
                             <div class="text-center mt-4">
-                                <a href="rate-order.php?order_id=<?= $order_id ?>" class="btn btn-success">Rate Order</a>
+                            <a href="index.php" class="btn btn- btn-success mt-3"> <i class="fas fa-home "></i> Back to Home</a> 
                             </div>
                         </div>
                     <?php
