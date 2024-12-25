@@ -1,4 +1,4 @@
-<footer class="py-5">
+<footer class="pt-5 bg-light shadow-lg">
   <div class="container-lg">
     <div class="row">
 
@@ -62,14 +62,14 @@
             </li>
             <li class="menu-item  ">
               <a href="categories.php" class="nav-link">Categories</a>
-            </li> 
+            </li>
             <li class="menu-item  ">
               <a href="about-us.php" class="nav-link">About Us</a>
             </li>
           </ul>
         </div>
       </div>
-     
+
       <div class="col-md-3 col-sm-6">
         <div class="footer-menu">
           <h5 class="widget-title">Quick Links</h5>
@@ -80,11 +80,11 @@
             <li class="menu-item  ">
               <a href="profile_update.php" class="nav-link">Profile</a>
             </li>
-          
+
             <li class="menu-item">
               <a href="offers.php" class="nav-link">Offers</a>
             </li>
-            
+
             <li class="menu-item  ">
               <a href="contact-us.php" class="nav-link">Contact Us</a>
             </li>
@@ -96,27 +96,26 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-6">
         <div class="footer-menu">
-          <h5 class="widget-title">Subscribe Us</h5>
-          <p>Subscribe to our newsletter to get updates about our grand offers.</p>
-          <form class="d-flex mt-3 gap-0" action="index.html">
-            <input class="form-control rounded-start rounded-0 bg-light" type="email" placeholder="Email Address" aria-label="Email Address">
-            <button class="btn btn-dark rounded-end rounded-0" type="submit">Subscribe</button>
-          </form>
+          <h5 class="widget-title">About Us</h5>
+          <p>
+            Welcome to Online Shopping System, 
+            <br> your one-stop destination for high-quality products and exceptional shopping experiences.  
+          </p>
         </div>
       </div>
 
     </div>
   </div>
 </footer>
-<div id="footer-bottom">
-  <div class="container-lg">
-    <div class="row ">
+<div id="footer-bottom  ">
+  <div class="container-lg border bg-light ">
+    <div class="row mt-2 ">
       <div class="col-md-6 text-right copyright">
-        <p>© 2024 Online Shop. All rights reserved.</p>
+        <p>© 2024 Online Shop. </p>
       </div>
-      <!-- <div class="col-md-6 credit-link text-start text-md-end">
-            <p>HTML Template by <a href="https://templatesjungle.com/">TemplatesJungle</a> Distributed By <a href="https://themewagon.com">ThemeWagon</a> </p>
-          </div> -->
+      <div class="col-md-6 credit-link text-start text-md-end">
+        <p>All rights reserved.</p>
+      </div>
     </div>
   </div>
 </div>

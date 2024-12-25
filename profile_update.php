@@ -93,8 +93,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
                         <div class="mb-3">
                             <label for="phone" class="form-label fw-bold">Your Phone <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" id="phone" name="phone" value="<?= htmlspecialchars($user['customer_phone']) ?>" required>
+                            <input
+                             maxlength="10"
+                                type="text"
+                                class="form-control"
+                                id="phone"
+                                name="phone" 
+                                value="<?= htmlspecialchars($user['customer_phone']) ?>"
+                                pattern="^[6-9]\d{9}$"
+                                title="Please enter a valid 10-digit mobile number starting with 6, 7, 8, or 9."
+                                required>
                         </div>
+
                         <div class="mb-3">
                             <label for="email" class="form-label fw-bold">Your Email <span class="text-danger">*</span></label>
                             <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($user['customer_email']) ?>" required>
@@ -116,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
 
                 <!-- Contact Information -->
-                <div class="col-md-12 mt-5">
+                <!-- <div class="col-md-12 mt-5">
                     <h3 class="text-primary mb-4">Need Help?</h3>
                     <p class="text-muted pb-4">
                         If you face any issues updating your profile, feel free to contact our support team for assistance. We're here to help!
@@ -124,12 +134,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="contact-info">
                         <p><strong>Customer Care:</strong> 7304767697</p>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </section>
-</div>
-
+</div>  
 <?php
 include("component/footer.php");
 ?>

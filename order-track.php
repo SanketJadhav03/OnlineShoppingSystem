@@ -89,12 +89,13 @@ if (isset($_GET['order_id'])) {
                                 <?php
                                 $grand_total = 0;
                                 $item_query = "SELECT oi.*, p.product_name, p.product_price, 
-                                    (SELECT rating FROM tbl_ratings WHERE product_id = oi.product_id AND order_id = oi.order_id AND customer_id = ?) AS user_rating
-                                    FROM tbl_order_items oi
-                                    JOIN tbl_product p ON oi.product_id = p.product_id
-                                    WHERE oi.order_id = ?";
+                   (SELECT rating FROM tbl_ratings WHERE product_id = oi.product_id AND order_id = oi.order_id AND customer_id = ?) AS user_rating,
+                   (SELECT description FROM tbl_ratings WHERE product_id = oi.product_id AND order_id = oi.order_id AND customer_id = ?) AS user_description
+                   FROM tbl_order_items oi
+                   JOIN tbl_product p ON oi.product_id = p.product_id
+                   WHERE oi.order_id = ?";
                                 $item_stmt = $conn->prepare($item_query);
-                                $item_stmt->bind_param("ii", $customer_id, $order_id);
+                                $item_stmt->bind_param("iii", $customer_id, $customer_id, $order_id);
                                 $item_stmt->execute();
                                 $item_result = $item_stmt->get_result();
 
@@ -104,15 +105,17 @@ if (isset($_GET['order_id'])) {
                                     $price = number_format($item['price'], 2);
                                     $total_item_price = number_format($item['quantity'] * $item['price'], 2);
                                     $grand_total += $item['quantity'] * $item['price'];
-                                    $user_rating = $item['user_rating'] ?? 0; // Get user's previous rating (if exists)
+                                    $user_rating = $item['user_rating'] ?? 0;
+                                    $user_description = htmlspecialchars($item['user_description'] ?? 'No description provided.');
                                 ?>
                                     <li class="list-group-item">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
+                                        <div class="row d-flex justify-content-between align-items-center">
+                                            <div class="col-6">
                                                 <strong><?= $product_name ?> (x<?= $quantity ?>)</strong>
                                                 <p>₹<?= $total_item_price ?></p>
+                                                <p><em><?= $user_description ?></em></p>
                                             </div>
-                                            <div>
+                                            <div class="col-6">
                                                 <!-- Rating Section -->
                                                 <form class="rating-form" data-product-id="<?= $item['product_id'] ?>" data-order-id="<?= $order_id ?>">
                                                     <div class="rating-stars">
@@ -120,16 +123,17 @@ if (isset($_GET['order_id'])) {
                                                             <i class="bi <?= $i <= $user_rating ? 'bi-star-fill text-warning' : 'bi-star'; ?>" data-rating="<?= $i ?>"></i>
                                                         <?php endfor; ?>
                                                     </div>
+                                                    <textarea class="form-control mt-2" name="description" placeholder="Write your review here..."><?= htmlspecialchars($item['user_description'] ?? '') ?></textarea>
                                                     <input type="hidden" name="rating" value="<?= $user_rating ?>">
-                                                    <button type="button" class="btn btn-primary btn-sm mt-2 save-rating">Rate</button>
+                                                    <button type="button" class="btn btn-primary btn-sm mt-2 save-rating">Submit</button>
                                                 </form>
                                             </div>
                                         </div>
                                     </li>
-                                <?php
-                                }
-                                ?>
+
+                                <?php } ?>
                             </ul>
+
                             <div class="d-flex justify-content-between align-items-center">
                                 <h6 class="text-right"><strong>Grand Total:</strong> ₹<?= number_format($grand_total, 2) ?></h6>
                             </div>
@@ -197,14 +201,17 @@ if (isset($_GET['order_id'])) {
                 const productId = form.getAttribute('data-product-id');
                 const orderId = form.getAttribute('data-order-id');
                 const rating = form.querySelector('input[name="rating"]').value;
+                const description = form.querySelector('textarea[name="description"]').value;
 
                 fetch('save-rating.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `product_id=${productId}&order_id=${orderId}&rating=${rating}`
-                }).then(response => response.text())
-                  .then(data => alert(data))
-                  .catch(error => console.error('Error:', error));
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        },
+                        body: `product_id=${productId}&order_id=${orderId}&rating=${rating}&description=${encodeURIComponent(description)}`
+                    }).then(response => response.text())
+                    .then(data => alert(data))
+                    .catch(error => console.error('Error:', error));
             });
         });
     });
