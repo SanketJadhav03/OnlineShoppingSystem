@@ -54,6 +54,12 @@
                     </a>
                 </li> -->
                 <li class="nav-item">
+                    <a href="<?= $base_url ?>feedback/index.php" class="nav-link">
+                        <i class="nav-icon fas fa-gift"></i>
+                        <p>Feedbacks</p>
+                    </a>
+                </li>   
+                <li class="nav-item">
                     <a href="<?= $base_url ?>#" class="nav-link">
                         <i class="fas fa-chart-bar nav-icon"></i>
                         <p>

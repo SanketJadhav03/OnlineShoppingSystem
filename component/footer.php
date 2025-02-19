@@ -81,9 +81,9 @@
               <a href="profile_update.php" class="nav-link">Profile</a>
             </li>
 
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="offers.php" class="nav-link">Offers</a>
-            </li>
+            </li> -->
 
             <li class="menu-item  ">
               <a href="contact-us.php" class="nav-link">Contact Us</a>

@@ -16,7 +16,7 @@ include "../component/sidebar.php";
                         Order ID
                         <input type="text" name="order_id" value="<?= isset($_GET["order_id"]) ? $_GET["order_id"] : '' ?>" class="form-control" placeholder="Order ID">
                     </div>
-                    
+
                     <div class="col-2 font-weight-bold">
                         Order Status
                         <select name="order_status" class="form-control">
@@ -52,7 +52,7 @@ include "../component/sidebar.php";
                             <i class="fas fa-search"></i> &nbsp;Find
                         </button>
                     </div>
-                    
+
                 </div>
             </form>
         </div>
@@ -152,22 +152,33 @@ include "../component/sidebar.php";
         <div class="card-footer">
             <div class="d-flex justify-content-center">
                 <div class="pagination">
-                    <?php if ($page > 1): ?>
-                        <a class="btn btn-sm btn-outline-info ml-2" href="?page=<?= $page - 1; ?>&<?= http_build_query($_GET); ?>">Previous</a>
-                    <?php endif; ?>
+                    <?php
+                    $queryString = $_GET;
+                    if ($page > 1):
+                        $queryString['page'] = $page - 1;
+                    ?>
+                        <a class="btn btn-sm btn-outline-info ml-2" href="?<?= http_build_query($queryString); ?>">Previous</a>
+                    <?php
+                    endif;
 
-                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                        <a class="btn btn-sm btn-<?= $page == $i ? 'info' : 'outline-info' ?> ml-2" href="?page=<?= $i; ?>&<?= http_build_query($_GET); ?>">
+                    for ($i = 1; $i <= $totalPages; $i++):
+                        $queryString['page'] = $i;
+                    ?>
+                        <a class="btn btn-sm btn-<?= $page == $i ? 'info' : 'outline-info' ?> ml-2" href="?<?= http_build_query($queryString); ?>">
                             <?= $i; ?>
                         </a>
-                    <?php endfor; ?>
+                    <?php
+                    endfor;
 
-                    <?php if ($page < $totalPages): ?>
-                        <a class="btn btn-sm btn-outline-info ml-2" href="?page=<?= $page + 1; ?>&<?= http_build_query($_GET); ?>">Next</a>
+                    if ($page < $totalPages):
+                        $queryString['page'] = $page + 1;
+                    ?>
+                        <a class="btn btn-sm btn-outline-info ml-2" href="?<?= http_build_query($queryString); ?>">Next</a>
                     <?php endif; ?>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 
