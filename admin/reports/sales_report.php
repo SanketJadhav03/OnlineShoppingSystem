@@ -104,8 +104,10 @@ include "../component/sidebar.php";
                             $whereConditions[] = "`order_status` = '" . mysqli_real_escape_string($conn, $_GET["order_status"]) . "'";
                         }
                         if (!empty($_GET["payment_status"])) {
-                            $whereConditions[] = "`payment_status` = '" . mysqli_real_escape_string($conn, $_GET["payment_status"]) . "'";
+                            $whereConditions[] = "`payment_status` = ".(int)($_GET["payment_status"]);
                         }
+                        
+                        
                         if (!empty($_GET["start_date"]) && !empty($_GET["end_date"])) {
                             $whereConditions[] = "`order_date` BETWEEN '" . mysqli_real_escape_string($conn, $_GET["start_date"]) . "' AND '" . mysqli_real_escape_string($conn, $_GET["end_date"]) . "'";
                         }

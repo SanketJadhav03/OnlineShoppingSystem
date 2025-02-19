@@ -26,7 +26,7 @@ if (!$blog) {
         </div>
         <div class="card-body">
             <div class="text-center mb-4">
-                <img src="admin/uploads/blogs/<?= $blog['blog_image_path'] == null ? 'no_img.png' : $blog['blog_image_path'] ?>" width="450" height="350" alt="Blog Image" class="rounded shadow-sm">
+                <img src="admin/uploads/blogs/<?= $blog['blog_image_path'] == null ? 'no_img.png' : $blog['blog_image_path'] ?>"  alt="Blog Image" class="img-fluid rounded shadow-sm">
             </div>
             <hr>
             <h5 class="font-weight-bold text-dark">Content:</h5>

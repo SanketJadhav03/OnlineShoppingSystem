@@ -41,7 +41,6 @@ $result = mysqli_query($conn, $selectQuery);
                                     <h4 class="post-title">
                                         <a href="blog_view.php?blog_id=<?= $data['blog_id'] ?>" class="text-decoration-none text-dark fw-bold"><?= htmlspecialchars($data['blog_title']) ?></a>
                                     </h4>
-                                    <p class="text-muted"><?= strip_tags($data['blog_content']) ?></p>
                                 </div>
                             </div>
                         </article>

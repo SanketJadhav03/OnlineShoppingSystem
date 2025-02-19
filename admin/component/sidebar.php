@@ -47,12 +47,12 @@
                     </a>
                 </li>
                 <!-- Offer Management (New) -->
-                <!-- <li class="nav-item">
+                <li class="nav-item">
                     <a href="<?= $base_url ?>offer/index.php" class="nav-link">
                         <i class="nav-icon fas fa-gift"></i>
                         <p>Offers</p>
                     </a>
-                </li> -->
+                </li>
                 <li class="nav-item">
                     <a href="<?= $base_url ?>feedback/index.php" class="nav-link">
                         <i class="nav-icon fas fa-gift"></i>

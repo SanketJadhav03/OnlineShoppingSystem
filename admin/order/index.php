@@ -26,8 +26,8 @@ include "../component/sidebar.php";
                         Payment Status
                         <select name="payment_status" class="form-control">
                             <option value="">All</option>
-                            <option value="1" <?= isset($_GET["payment_status"]) && $_GET["payment_status"] == "1" ? "selected" : "" ?>>Paid</option>
-                            <option value="0" <?= isset($_GET["payment_status"]) && $_GET["payment_status"] == "2" ? "selected" : "" ?>>Unpaid</option>
+                            <option value="0" <?= isset($_GET["payment_status"]) && $_GET["payment_status"] == "0" ? "selected" : "" ?>>Paid</option>
+                            <option value="1" <?= isset($_GET["payment_status"]) && $_GET["payment_status"] == "1" ? "selected" : "" ?>>Unpaid</option>
                         </select>
                     </div>
                     <div class="col-2 font-weight-bold">
@@ -104,7 +104,7 @@ include "../component/sidebar.php";
                                 <td><?= $data['order_status'] == 1 ? "Pending" : ($data['order_status'] == 2 ? "Out For Delivery" : "Delivered") ?></td>
                                 <td>₹<?= number_format($data["total_price"], 2) ?></td> 
                                 <td><?= $data["payment_method"] == 1 ? "Cash On Delivery" : "Online" ?></td>
-                                <td><?= $data["payment_status"] == "1" ? '<span class="text-success">Paid</span>' : '<span class="text-danger">Unpaid</span>' ?></td>
+                                <td><?= $data["payment_status"] == "0" ? '<span class="text-success">Paid</span>' : '<span class="text-danger">Unpaid</span>' ?></td>
                                 <td>
                                     <a href="view.php?order_id=<?= $data["order_id"] ?>" class="btn btn-sm shadow btn-info">
                                         <i class="fa fa-eye"></i>
