@@ -26,7 +26,7 @@ if (!$order) {
 }
 
 // Fetch products for the order from tbl_order_items
-$product_query = "SELECT oi.order_item_id, oi.product_id, oi.quantity, oi.price, oi.created_at, p.product_name 
+$product_query = "SELECT p.*,oi.order_item_id, oi.product_id, oi.quantity, oi.price, oi.created_at, p.product_name 
                   FROM tbl_order_items oi JOIN tbl_product p ON oi.product_id = p.product_id 
                   WHERE oi.order_id = ?";
 $product_stmt = $conn->prepare($product_query);
@@ -89,7 +89,7 @@ $product_result = $product_stmt->get_result();
                         </tr>
                         <tr>
                             <th>Payment Status</th>
-                            <td><?= htmlspecialchars($order['payment_status']) == 1 ? "<span class='text-success font-weight-bold'>Paid</span>"  : "<span class='text-danger font-weight-bold'>Unpaid</span>" ?></td>
+                            <td><?= htmlspecialchars($order['payment_status']) == 0 ? "<span class='text-success font-weight-bold'>Paid</span>"  : "<span class='text-danger font-weight-bold'>Unpaid</span>" ?></td>
                         </tr>
                         <tr>
                             <th>Order Status</th>
@@ -125,8 +125,8 @@ $product_result = $product_stmt->get_result();
                             <tr>
                                 <td><?= htmlspecialchars($product['product_name']) ?></td>
                                 <td><?= htmlspecialchars($product['quantity']) ?></td>
-                                <td>&#8377; <?= number_format($product['price'], 2) ?></td>
-                                <td>&#8377; <?= number_format($product['quantity'] * $product['price'], 2) ?></td>
+                                <td>&#8377; <?= number_format($product['product_price'] - $product['product_dis_value'], 2) ?></td>
+                                <td>&#8377; <?= number_format($product['quantity'] * ($product['product_price'] - $product['product_dis_value']), 2) ?></td>
                                 <td><?= date("d/m/Y h:i A", strtotime($product['created_at'])) ?></td>
                             </tr>
                         <?php } ?>

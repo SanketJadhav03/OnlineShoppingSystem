@@ -33,7 +33,7 @@ foreach ($wishlistItems as $item) {
     </a>
     <!-- Notification Badge -->
     <span class="badge bg-danger rounded-circle position-absolute top-0 start-100 translate-middle p-2">
-        5
+    <?= count($wishlistItems) ?>
         <span class="visually-hidden">Items in wishlist</span>
     </span>
 </li>

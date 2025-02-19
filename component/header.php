@@ -298,9 +298,9 @@ session_start();
               <a href="categories.php" class="nav-link">Categories</a>
             </li>
 
-            <!-- <li class="nav-item  ">
+            <li class="nav-item  ">
               <a href="offers.php" class="nav-link">Offers</a>
-            </li> -->
+            </li>
             <li class="nav-item  ">
               <a href="blogs.php" class="nav-link">Blogs</a>
             </li>

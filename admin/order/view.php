@@ -12,7 +12,7 @@ if (!$order_id) {
 }
 
 // Fetch order details
-$query = "SELECT * FROM tbl_orders WHERE order_id = ?";
+$query = "SELECT * FROM tbl_orders INNER JOIN tbl_customer ON tbl_customer.customer_id = tbl_orders.customer_id WHERE order_id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param('i', $order_id);
 $stmt->execute();
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </tr>
                         <tr>
                             <th>Customer ID</th>
-                            <td><?= htmlspecialchars($order['customer_id']) ?></td>
+                            <td><?= htmlspecialchars($order['customer_name']) ?></td>
                         </tr>
                         <tr>
                             <th>Order Date</th>
@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </tr>
                         <tr>
                             <th>Payment Status</th>
-                            <td><?= htmlspecialchars($order['payment_status']) == 1 ? "<span class='text-success font-weight-bold'>Paid</span>"  : "<span class='text-danger font-weight-bold'>Unpaid</span>" ?></td>
+                            <td><?= htmlspecialchars($order['payment_status']) == 0 ? "<span class='text-success font-weight-bold'>Paid</span>"  : "<span class='text-danger font-weight-bold'>Unpaid</span>" ?></td>
                         </tr>
                         <tr>
                             <th>Order Status</th>
@@ -122,8 +122,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="form-group">
                             <label for="payment_status">Payment Status</label>
                             <select name="payment_status" id="payment_status" class="form-control">
-                                <option value="0" <?= $order['payment_status'] === 0 ? 'selected' : '' ?>>Unpaid</option>
-                                <option value="1" <?= $order['payment_status'] === 1 ? 'selected' : '' ?>>Paid</option>
+                                <option value="1" <?= $order['payment_status'] === 1 ? 'selected' : '' ?>>Unpaid</option>
+                                <option value="0" <?= $order['payment_status'] === 0 ? 'selected' : '' ?>>Paid</option>
  
                             </select>
                         </div>

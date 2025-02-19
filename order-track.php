@@ -61,11 +61,11 @@ if (isset($_GET['order_id'])) {
                     if ($order) {
                     ?>
                         <div class="order-card p-4 border shadow-sm">
-                            <h5>Order ID: <?=  htmlspecialchars($order_id) ?></h5>
+                            <h5>Order ID: <?= htmlspecialchars($order_id) ?></h5>
                             <p><strong>Date:</strong> <?= $order_date ?></p>
                             <p><strong>Total Price:</strong> ₹<?= $total_price ?></p>
-                            <p><strong>Payment Method:</strong> <?= ucfirst($payment_method) == 1 ? "Cash On delivery":"Online" ?></p>
-                            <p><strong>Payment Status:</strong> <?= ucfirst($payment_status) == 1 ? "<span class='text-success fw-bold'>Paid</span>":"<span class='text-danger fw-bold'>Unpaid</span>" ?></p>
+                            <p><strong>Payment Method:</strong> <?= ucfirst($payment_method) == 1 ? "Cash On delivery" : "Online" ?></p>
+                            <p><strong>Payment Status:</strong> <?= ucfirst($payment_status) == 0 ? "<span class='text-success fw-bold'>Paid</span>" : "<span class='text-danger fw-bold'>Unpaid</span>" ?></p>
 
                             <!-- Display Order Status as a Map -->
                             <h6>Order Status:</h6>
@@ -91,7 +91,7 @@ if (isset($_GET['order_id'])) {
                             <ul class="list-group mb-3">
                                 <?php
                                 $grand_total = 0;
-                                $item_query = "SELECT oi.*, p.product_name, p.product_price, 
+                                $item_query = "SELECT oi.*, p.*, 
                    (SELECT rating FROM tbl_ratings WHERE product_id = oi.product_id AND order_id = oi.order_id AND customer_id = ?) AS user_rating,
                    (SELECT description FROM tbl_ratings WHERE product_id = oi.product_id AND order_id = oi.order_id AND customer_id = ?) AS user_description
                    FROM tbl_order_items oi
@@ -105,9 +105,9 @@ if (isset($_GET['order_id'])) {
                                 while ($item = $item_result->fetch_assoc()) {
                                     $product_name = htmlspecialchars($item['product_name']);
                                     $quantity = $item['quantity'];
-                                    $price = number_format($item['price'], 2);
-                                    $total_item_price = number_format($item['quantity'] * $item['price'], 2);
-                                    $grand_total += $item['quantity'] * $item['price'];
+                                    $price = number_format($item['product_price'] - $item['product_dis_value'], 2);
+                                    $total_item_price = number_format($item['quantity'] * ($item['product_price'] - $item['product_dis_value']), 2);
+                                    $grand_total += ($item['quantity'] * ($item['product_price'] - $item['product_dis_value']));
                                     $user_rating = $item['user_rating'] ?? 0;
                                     $user_description = htmlspecialchars($item['user_description'] ?? 'No description provided.');
                                 ?>
@@ -143,7 +143,7 @@ if (isset($_GET['order_id'])) {
 
                             <!-- Rate Order Button -->
                             <div class="text-center mt-4">
-                            <a href="index.php" class="btn btn- btn-success mt-3"> <i class="fas fa-home "></i> Back to Home</a> 
+                                <a href="index.php" class="btn btn- btn-success mt-3"> <i class="fas fa-home "></i> Back to Home</a>
                             </div>
                         </div>
                     <?php
