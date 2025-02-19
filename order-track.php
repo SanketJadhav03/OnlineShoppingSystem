@@ -44,7 +44,7 @@ if (isset($_GET['order_id'])) {
     <section class="hero-section text-center py-5 bg-primary text-white">
         <h1 class="font-weight-bold mb-3">Track Your Order</h1>
         <p class="lead">Order ID: <?= isset($order_id) ? htmlspecialchars($order_id) : 'Not Found' ?></p>
-        <a href="index.php" class="btn btn-light mt-3"> <i class="fas fa-home "></i> Back to Home</a>
+        <a href="order-history.php" class="btn btn-light mt-3"> <i class="fas fa-home "></i> Back to Home</a>
     </section>
 
     <!-- Order Tracking Section -->

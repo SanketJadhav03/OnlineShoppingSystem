@@ -35,32 +35,55 @@ $order_result = $stmt->get_result();
                     while ($order = $order_result->fetch_assoc()) {
                         $order_id = $order['order_id'];
                         $order_date = date("d/m/Y h:i A", strtotime($order['order_date']));
-
-                        $order_status = $order['order_status'] == 1 ? "Pending" : ($order['order_status'] == 2 ? "Out For Delivery" : "Delivered");
                         $total_price = number_format($order['total_price'], 2);
                         $payment_status = $order['payment_status'];
+
+                        // Order status logic
+                        switch ($order['order_status']) {
+                            case 1:
+                                $order_status = "Pending";
+                                $badge_class = "bg-warning text-dark";
+                                break;
+                            case 2:
+                                $order_status = "Out For Delivery";
+                                $badge_class = "bg-info text-white";
+                                break;
+                            case 3:
+                                $order_status = "Delivered";
+                                $badge_class = "bg-success text-white";
+                                break;
+                            default:
+                                $order_status = "Unknown";
+                                $badge_class = "bg-secondary text-white";
+                        }
                 ?>
-                        <div class="col-md-6 ">
-                            <div class="row  mb-4 p-4  border  rounded shadow-sm">
-                                <div class="col-6">
-                                    <h5 class="mb-2  text-primary">ID: <span class="text-muted"><?php echo $order_id; ?></span></h5>
-                                    <p><strong>Date:</strong> <?php echo $order_date; ?></p>
+                        <div class="col-md-6">
+                            <div class="p-4 border rounded shadow mb-4" style="background-color: #f9f9f9; border-left: 5px solid #007bff;">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="text-primary">Order #<?php echo $order_id; ?></h5>
+                                    <span class="badge <?php echo $badge_class; ?>"><?php echo $order_status; ?></span>
                                 </div>
-                                <div class="col-3">
-                                    <p><strong>Status:</strong> <span class="badge bg-info  text-dark"><?php echo $order_status; ?></span></p>
+                                <p class="mb-1"><strong>Date:</strong> <?php echo $order_date; ?></p>
+                                <p class="mb-1"><strong>Total:</strong> ₹<?php echo $total_price; ?></p>
+             
+                                <p class="mb-1 text-start">
+
+                                    <strong>Payment Status:</strong>
+                                    <span class="badge <?php echo $payment_status == '0' ? 'bg-success' : 'bg-danger'; ?>">
+                                        <?php echo $payment_status == '0' ? 'Paid' : 'Pending'; ?>
+                                    </span>
+                                </p>
+                                <div class="text-end">
+                                    <a href="order-track.php?order_id=<?php echo $order_id; ?>" class="btn btn-outline-primary btn-sm">Track Order</a>
                                 </div>
-                                <div class="col-3 ">
-                                    <a href="order-track.php?order_id=<?php echo $order_id; ?>" class="btn btn-outline-primary mt-3 w-100">More Details</a>
-                                </div>
-                            </div> <!-- End of order-card -->
+                            </div> <!-- End of order card -->
                         </div>
                 <?php
                     }
                 } else {
-                    echo "<p class='text-center'>No orders found.</p>";
+                    echo "<p class='text-center text-muted'>You have no orders yet.</p>";
                 }
                 ?>
-
             </div>
         </div>
     </section>
