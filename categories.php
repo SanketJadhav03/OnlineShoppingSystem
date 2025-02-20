@@ -15,7 +15,7 @@ $result = mysqli_query($conn, $selectQuery);
     <div class="card-body">
         <div class="row">
             <?php while ($category = mysqli_fetch_array($result)) { ?>
-                <div class="col-md-4 mb-4">
+                <div class="col-md-3 mb-4">
                     <div class="category-item card border-0 shadow-sm p-3 rounded-lg hover-zoom">
                         <div class="image-holder position-relative overflow-hidden rounded-lg">
                             <a href="products.php?category_id=<?= $category['category_id'] ?>">

@@ -288,7 +288,7 @@ include("component/header.php");
               </div>
               <div class="post-header">
                 <h3 class="post-title">
-                  <a href="blog_view.php?blog_id=<?= $data['blog_id'] ?>" class="text-decoration-none"><?= htmlspecialchars($data['blog_title']) ?></a>
+                  <a href="blog_view.php?blog_id=<?= $data['blog_id'] ?>" class="text-decoration-none"><?= substr(strip_tags($data['blog_title']),0,25)."..." ?></a>
                 </h3>
                 <p><?= substr(strip_tags($data['blog_content']), 0, 100) . '...' ?></p>
               </div>

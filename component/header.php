@@ -343,7 +343,7 @@ session_start();
             </li>
             <li>
               <a href="logout.php" class=" nav-link mt-2 fw-bold mx-1" title="Logout">
-              <span class="pt-1 username "> Logout</span>
+              <span class="pt-1 username "> <i class="fas fa-sign-out-alt"></i> </span>
               </a>
             </li>
            
