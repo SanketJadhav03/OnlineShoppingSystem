@@ -4,9 +4,9 @@ include "../config/connection.php";
 // Query to fetch most sold products based on order items
 $query = "
     SELECT 
-        p.product_name, 
+        p.*, 
         SUM(oi.quantity) AS total_sold, 
-        SUM(oi.quantity * oi.price) AS total_revenue
+        SUM(oi.quantity * (p.product_price - p.product_dis_value)) AS total_revenue
     FROM tbl_order_items oi
     INNER JOIN tbl_orders o ON oi.order_id = o.order_id
     INNER JOIN tbl_product p ON oi.product_id = p.product_id

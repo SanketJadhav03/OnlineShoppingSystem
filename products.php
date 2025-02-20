@@ -37,9 +37,9 @@ $productQuery .= " GROUP BY p.product_id";
 // Add sorting by discount if specified
 if ($sortByDiscount) {
     if ($sortByDiscount == 'high-to-low') {
-        $productQuery .= " ORDER BY p.product_dis ASC";
-    } else {
         $productQuery .= " ORDER BY p.product_dis DESC";
+    } else {
+        $productQuery .= " ORDER BY p.product_dis ASC";
     }
 } else {
     // Default sorting by category and date if no sort is specified
