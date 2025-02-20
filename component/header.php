@@ -315,7 +315,7 @@ session_start();
           </ul>
         </div>
 
-        <div class="col-sm-8 col-lg-2 d-flex gap-5 align-items-center justify-content-center justify-content-sm-end">
+        <div class="col-sm-8 col-lg-2 d-flex gap-2 align-items-center justify-content-center justify-content-sm-end">
           <ul class="d-flex mt-3 justify-content-end list-unstyled m-0">
             <?php
 
@@ -333,7 +333,7 @@ session_start();
                 <a href="profile_update.php" class="nav-link fw-bold d-flex mt-1 mx-1">
                   <span><svg width="24" height="24">
                       <use xlink:href="#user"></use>
-                    </svg></span> &nbsp; <span class="pt-1 username"><?php echo htmlspecialchars($username); ?></span>
+                    </svg></span> &nbsp; <span class="pt-1 username">Hii, <?php echo substr(strip_tags(($username)),0,5); ?></span>
                 </a>
               <?php } ?>
 

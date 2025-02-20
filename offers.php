@@ -21,15 +21,12 @@ $result = mysqli_query($conn, $selectQuery);
         <div class="card-body">
             <div class="row">
                 <?php while ($data = mysqli_fetch_array($result)) { ?>
-                    <div class="col-md-4 mb-4">
+                    <div class="col-md-3 mb-4">
                         <article class="offer-item card border-0 shadow-sm p-3 rounded-lg hover-zoom">
                             <div class="image-holder position-relative overflow-hidden rounded-lg">
                                 <a href="view_offer.php?offer_id=<?= $data['offer_id'] ?>">
                                     <img src="admin/uploads/offers/<?= $data['offer_image'] == null ? 'no_img.png' : $data['offer_image'] ?>" alt="offer" class="card-img-top w-100">
-                                </a>
-                                <div class="hover-overlay position-absolute top-0 start-0 w-100 h-100 d-flex justify-content-center align-items-center">
-                                    <!-- You can add a label here, such as "Shop Now" or similar -->
-                                </div>
+                                </a> 
                             </div>
                             <div class="card-body p-4">
                                 <div class="offer-meta d-flex justify-content-between text-uppercase gap-2 my-2">
