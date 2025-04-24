@@ -30,11 +30,14 @@ if (mysqli_query($conn, $order_query)) {
     $cart_result = mysqli_query($conn, $cart_query);
     while ($item = mysqli_fetch_assoc($cart_result)) {
         $product_id = $item['cart_product_id'];
+        $productStock = $item['product_stock'] - $item['cart_product_qty'];
         $quantity = $item['cart_product_qty'];
         $price = number_format(($item['product_price'] - $item['product_dis_value']) * $item['cart_product_qty'], 2);
 
         $order_item_query = "INSERT INTO tbl_order_items (order_id, product_id, quantity, price) 
                              VALUES ('$order_id', '$product_id', '$quantity', '$price')";
+        $product_update = "UPDATE tbl_product SET product_stock = '$productStock' WHERE product_id = $product_id";
+        mysqli_query($conn,$product_update);
         mysqli_query($conn, $order_item_query);
     }
 

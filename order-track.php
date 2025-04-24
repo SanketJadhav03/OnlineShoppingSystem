@@ -128,6 +128,7 @@ if (isset($_GET['order_id'])) {
                                                     </div>
                                                     <textarea class="form-control mt-2" name="description" placeholder="Write your review here..."><?= htmlspecialchars($item['user_description'] ?? '') ?></textarea>
                                                     <input type="hidden" name="rating" value="<?= $user_rating ?>">
+
                                                     <button type="button" class="btn btn-primary btn-sm mt-2 save-rating">Submit</button>
                                                 </form>
                                             </div>
@@ -142,13 +143,19 @@ if (isset($_GET['order_id'])) {
                             </div>
 
                             <!-- Rate Order Button -->
-                            <div class="text-center mt-4">
-                                <a href="index.php" class="btn btn- btn-success mt-3"> <i class="fas fa-home "></i> Back to Home</a>
-                            </div>
+                            <!-- Print Receipt Button -->
+
                         </div>
                     <?php
                     }
                     ?>
+                </div>
+                <div class="text-center mt-4">
+                    <button class="btn btn-info mt-3" onclick="printReceipt()"> <i class="fas fa-print"></i> Print Receipt</button>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="index.php" class="btn btn- btn-success mt-3"> <i class="fas fa-home "></i> Back to Home</a>
                 </div>
             </div>
         </div>
@@ -157,6 +164,17 @@ if (isset($_GET['order_id'])) {
 
 <!-- Add Bootstrap Icons for the status steps -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<script>
+    function printReceipt() {
+        const printContent = document.querySelector('.order-card').innerHTML;
+        const originalContent = document.body.innerHTML;
+
+        document.body.innerHTML = `<div class="order-card">${printContent}</div>`;
+        window.print();
+        document.body.innerHTML = originalContent;
+        location.reload(); // Reload the page to restore the original content
+    }
+</script>
 
 <style>
     .order-status-map ul {

@@ -86,15 +86,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                     <div class="contact-info">
                         <p><strong>Phone:</strong> 7304767697</p>
-                        <p><strong>Email:</strong> jadhavsanket1303@gmail.com</p>
-                        <p><strong>Address:</strong> Indapur road, Baramati, 413133</p>
+                        <p><strong>Email:</strong> svpm@gmail.com</p>
+                        <p><strong>Address:</strong> Malegaon Budruk, Malegaon Bk, Maharashtra 413115</p>
                     </div>
                     <div class="map-section mt-4">
                         <h4 class="text-primary">Find Us Here</h4>
                         <p class="text-muted">We're easy to find! Just click on the map to get directions to our location.</p>
                         <!-- Embed Google Maps -->
                         <div class="embed-responsive embed-responsive-16by9">
-                            <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=YOUR_GOOGLE_MAPS_EMBED_URL_HERE" allowfullscreen=""></iframe>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1895.7686390821489!2d74.49727247229227!3d18.139147299999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc3a0cd33c822f3%3A0xaed54077fcb25400!2sMalegaon%20College%20of%20Engineering!5e0!3m2!1sen!2sin!4v1742871477306!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                         </div>
                     </div>
                 </div>
